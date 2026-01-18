@@ -1,5 +1,5 @@
 #!/bin/bash
-INTERFACE="wlp2s0" # Cambia esto por tu interfaz (usa 'ip link' para verla)
+INTERFACE="wlp2s0"
 
 # Leer bytes actuales
 R1=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
@@ -8,8 +8,20 @@ sleep 1
 R2=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
 T2=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
 
-# Calcular velocidad (bytes por segundo)
-TBPS=$((($T2-$T1) / 1024))
-RBPS=$((($R2-$R1) / 1024))
+# Calcular velocidad en KB/s
+TBPS=$((($T2 - $T1) / 1024))
+RBPS=$((($R2 - $R1) / 1024))
 
-echo "⬇${TBPS}K ⬆${TBPS}K"
+# Función para formatear (KB o MB)
+format_speed() {
+    local speed=$1
+    if [ "$speed" -gt 1024 ]; then
+        # Calcula MB con un decimal (usando bc para precisión)
+        echo "$(echo "scale=1; $speed/1024" | bc)M"
+    else
+        echo "${speed}K"
+    fi
+}
+
+# Mostrar resultado final
+echo "⬇ $(format_speed $RBPS) ⬆ $(format_speed $TBPS)"
