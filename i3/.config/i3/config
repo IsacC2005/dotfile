@@ -1,0 +1,335 @@
+# i3wm config file
+# Autor:
+#       Joan Carles "Geekland"
+# Version:
+#       v1.0: 01/02/2021 - Primera configuración i3
+
+# Establecemos que la tecla principal para trabajar con i3 sea la de Windows
+set $mod Mod4
+
+# Establecemos que la fuente del sistema sea la System San Francisco y que el tamaño sea 10
+font pango:System San Francisco Display 10
+ 
+# Al tener como mínimo 2 ventanas abiertas presionamos la tecla Windows, Posicionamos el ratón en uno de los bordes de la ventana, presionamos el botón derecho del ratón y lo arrastramos para modificar el tamaños de las ventanas
+floating_modifier $mod
+
+
+# El atajo de teclado para abrir una terminal será windows + Enter. Aquí también podemos seleccionar la terminal que queremos que se abra.
+bindsym $mod+Return exec warp-terminal
+
+# La combinación de teclas para cerrar una ventana activa es windows+shift+q
+bindsym $mod+Shift+q kill
+
+# Definimos el tema y los atajos de teclado para el funcionamiento de Rofi. Si cuando Rofi está abierto presionamos Shift+cursores derecha e izquierda obtendremos funcionalidades adicionales.
+#set $rofi_theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+bindsym Ctrl+Shift+d exec rofi -show drun -config $rofi_theme -show-icons -font "System San Francisco Display 12"
+bindsym Ctrl+Shift+space exec rofi -show window -config $rofi_theme -show-icons
+
+# Combinación de teclas a usar para movernos entre ventanas. En mi caso uso la tecla windows+los cursores. En vez de los cursores también se pueden usar j,k,l y ñ
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus right
+bindsym $mod+i focus up
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Para mover la ventana seleccionada arriba, abajo izquierda o derecha presionando la tecla Win+Shift+cursores. En vez de los cursores también se pueden usar j,k,l y ñ
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ntilde move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Para definir que la siguiente ventana que abramos lo haga abajo o al lado de la actual que tenemos activa. Si os fijáis bien veréis un marco de color verde que indicará la posición donde se ubicará la nueva ventana
+bindsym $mod+shift+h split h
+bindsym $mod+shift+v split v
+
+# Para poner la ventana seleccionada a pantalla completa presionar Win+f
+bindsym $mod+f fullscreen toggle
+
+# Para hacer que las ventanas se dispongan/abran en modo tiling, pestaña o apiladas. La opción predeterminada es el modo tiling
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Para transformar una ventana de anclada a flotante y viceversa
+bindsym $mod+Shift+space floating toggle
+
+# Si la ventana activa actual está en modo tiling y queremos que la ventana activa sea una ventana flotante deberemos presionar Win+Espacio
+bindsym $mod+space focus mode_toggle
+
+# La tecla Win+a sirve para agrupar ventanas. Una vez agrupadas podremos insertar nuevas ventanas en la posición que exactamente necesitemos.
+bindsym $mod+a focus parent
+
+# Dar un nombre a los distintos espacios de trabajo o escritorios virtuales
+set $workspace1 "1: Terminal "
+set $workspace2 "2: Navegación "
+set $workspace3 "3: Edición "
+set $workspace4 "4: Music "
+set $workspace5 "5: Chat "
+set $workspace6 "6: Email "
+set $workspace7 "7: Folders "
+set $workspace8 "8" 
+set $workspace9 "9"
+set $workspace10 "10"
+
+# Para irse a un espacio de trabajo determinado tecla Win + Número de espacio que queremos ir
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# Irse a un espacio de trabajo determinado usando el teclado numérico
+bindsym $mod+Mod2+KP_1 workspace $workspace1
+bindsym $mod+Mod2+KP_2 workspace $workspace2
+bindsym $mod+Mod2+KP_3 workspace $workspace3
+bindsym $mod+Mod2+KP_4 workspace $workspace4
+bindsym $mod+Mod2+KP_5 workspace $workspace5
+bindsym $mod+Mod2+KP_6 workspace $workspace6
+bindsym $mod+Mod2+KP_7 workspace $workspace7
+bindsym $mod+Mod2+KP_8 workspace $workspace8
+bindsym $mod+Mod2+KP_9 workspace $workspace9
+bindsym $mod+Mod2+KP_0 workspace $workspace10
+
+# Para mover una ventana activa al espacio de trabajo que queremos. Win+Shift+Número_de_espacio_de_trabajo
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Para mover una ventana activa al espacio de trabajo que queremos con el teclado numérico. Win+Shift+Número_de_espacio_de_trabajo
+bindsym $mod+Shift+Mod2+KP_End move container to workspace $workspace1
+bindsym $mod+Shift+Mod2+KP_Down move container to workspace $workspace2
+bindsym $mod+Shift+Mod2+KP_Next move container to workspace $workspace3
+bindsym $mod+Shift+Mod2+KP_Left move container to workspace $workspace4
+bindsym $mod+Shift+Mod2+KP_Begin move container to workspace $workspace5
+bindsym $mod+Shift+Mod2+KP_Right move container to workspace $workspace6
+bindsym $mod+Shift+Mod2+KP_Home move container to workspace $workspace7
+bindsym $mod+Shift+Mod2+KP_Up move container to workspace $workspace8
+bindsym $mod+Shift+Mod2+KP_Prior move container to workspace $workspace9
+bindsym $mod+Shift+Mod2+KP_Insert move container to workspace $workspace10
+
+# Para intercambiar los 2 últimos escritorios en que hemos estado
+bindsym $mod+Tab workspace back_and_forth
+# Hacer que un programa determinado se abra en un espacio de trabajo determinado. Con el comando xprop podremos averiguar la class de cada uno de los programas.
+# Warp se abrirá en el espacio de trabajo 1
+assign [class="Warp"] $workspace1
+# Firefox y Chrome se abrirán en el espacio de trabajo 2
+assign [class="Firefox"] $workspace2
+assign [class="Google-chrome"] $workspace2
+# Typora se abrirá en el espacio de trabajo 3
+#assign [class="Atom"] $workspace3
+assign [class="Code"] $workspace3
+#assign [class="Mousepad"] $workspace3
+# Thunar se abrirá en el espacio de trabajo 4
+#assign [class="Thunar"] $workspace4
+# Deezer se abrirá en el expacio de trabajo 4
+#assign [class="Audacious"] $workspace4
+assign [class="deezer"] $workspace4
+# Telegram se abrirá en el espacio de trabajo 5
+assign [class="TelegramDesktop"] $workspace5
+# El espacio de trabajo 6 lo usaré para enviar emails con thunderbird
+assign [class="thunderbird"] $workspace6
+# Thunar se abrira en el espacio de trabajo 7
+assign [class="Thunar"] $workspace7
+
+# Atajo de teclado para recargar el archivo de configuración de i3
+bindsym $mod+Shift+c reload
+
+# Atajo de teclado para reiniciar por completo el escritorio i3. No te saca de la sesión ni pierdes ningún tipo de información.
+bindsym $mod+Shift+r restart
+
+# Atajo de teclado para cerrar completamente la sesión de i3. Una vez cerrada la sesión veremos la ventana de login de Lightdm
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Configuración para redimensionar las ventanas
+mode "resize" {
+        # Vim bindings
+        bindsym j resize shrink width 3 px or 3 ppt
+        bindsym k resize grow height 3 px or 3 ppt
+        bindsym l resize shrink height 3 px or 3 ppt
+        bindsym ntilde resize grow width 3 px or 3 ppt
+
+        # Arrow bindings
+        bindsym Left resize shrink width 3 px or 3 ppt
+        bindsym Down resize grow height 3 px or 3 ppt
+        bindsym Up resize shrink height 3 px or 3 ppt
+        bindsym Right resize grow width 3 px or 3 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Combinación de teclas para activar el modo redimensionar ventans
+bindsym $mod+r mode "resize"
+
+# Configuración de colores mostrados en pantalla
+set $bg-color	          #2f343f
+set $border-focus	  #5294e2
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $blue-color          #5DA8F4
+
+# Colores de las ventanas
+#                       Border              Background         text                 indicator
+client.focused          $border-focus       $border-focus      $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $blue-color         $blue-color        $text-color          #00ff00
+
+# Se define parte de la configuración de la barra i3blocks
+bar {
+        # Bar program
+#       status_command i3blocks -c ~/.i3/i3blocks.conf
+	    font xft: FontAwesome 9
+
+#       status_command i3status
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+
+        # Position of the bar
+        position top
+        
+        # Bar colors
+        colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+	        urgent_workspace   $blue-color        $blue-color        $text-color
+        }
+}
+
+# Quita la ventana de título y se define el grosor del borde que recubre las ventanas
+for_window [class="^.*"] border pixel 2
+
+# Mutear, incrementar y bajar el volúmen con el teclado "pactl tiene que estar instalado"
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+11 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+11 i3blocks #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+11 i3blocks # mute sound
+bindsym Mod1+Up exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+11 i3blocks #increase sound volume
+bindsym Mod1+Down exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+11 i3blocks #decrease sound volume
+bindsym Mod1+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+11 i3blocks # mute sound
+
+# Win+F9 para ir cambiando la salida de audio
+#bindsym $mod+F9  exec ~/.config/i3/scripts/toggle_sink.sh
+
+# Para incrementar o disminuir el brillo del monitor. Hace falta tener instalado xbacklight. Como no uso la opción la descomento
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && pkill -RTMIN+10 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- && pkill -RTMIN+10 i3blocks
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /home/joan/bin/toggletouchpad # toggle touchpad
+
+# Invertir el scroll del trackpad "Solo activar en equipos con trackpad"
+# exec_always --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113 
+
+# Deshabitar el trackpad mientras escribimos "Solo activar en equipos con trackpad"
+# exec syndaemon -i 0.3 -t -K -R
+
+# Asignación de las teclas multimedia
+#bindsym XF86AudioPlay exec play_pause
+#bindsym XF86AudioPause exec play_pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+# Atajos de teclado para lanzar programas.
+#(i3lock es otra opción para bloquear la pantalla, para usarlo hay que instalar el paquete i3lock)
+bindsym $mod+x exec i3lock --color "$bg-color" 
+bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+p exec firefox -private
+
+bindsym $mod+v exec code
+bindsym $mod+b exec google-chrome-stable
+bindsym $mod+t exec thunar
+bindsym $mod+shift+t exec ~/.local/bin/Telegram/Telegram
+
+#bindsym $mod+Shift+b exec blueman-manager
+
+# Seleccionar las aplicaciones que arrancar al iniciar i3
+#exec telegram-desktop
+
+# Para añadir el applet de Nework manager en el panel
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+#exec --no-startup-id nextcloud
+#exec --no-startup-id redshift-gtk
+
+# Hacer que se active el teclado númerico cada que que se rearranque el gestor de ventanas i3. Hay que tener instalado el paquete numlockx
+exec_always --no-startup-id numlockx on
+
+# Para establecer un fondo escritorio cada vez que se arranque o rearranque i3. "sudo apt install feh"
+exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/fondo.jpeg
+
+# Hacer que la ventana de redacción de un email en thunderbird se abra en modo flotante "para ver las clases de las ventanas podemos usar xprop"
+for_window [window_role="Msgcompose" class="(?i)Thunderbird"] floating enable
+
+# Fijamos que la tecla imprimir pantalla sea encargada de realizar capturas de pantalla con la utilidad de XFCE. Una alternatica es usar flameshot
+bindsym Print exec --no-startup-id xfce4-screenshooter
+bindsym Control+Print exec --no-startup-id flameshot gui
+
+# Habilitar geoclue
+# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+
+# Combinación de teclas para bloquear la pantalla (Requiere el uso de Lightdm)
+bindsym $mod+shift+F2 exec dm-tool lock
+
+# Habilitar un compositor para tener transparencias y transiciones suaves. "sudo apt install compton"
+exec --no-startup-id picom &
+exec --no-startup-id picom --config ~/.config/picom/picom.conf &
+#exec compton -f
+#exec compton --config /home/joan/.config/compton/compton.confexec compton --config /home/joan/.config/compton/compton.conf
+
+# Esconder la barra de i3 en elS caso que lo consideremos oportuno
+bindsym $mod+m bar mode toggle
+# Para cerrar el ordenador presionar la combinación de teclas Ctrl+Alt+S
+bindsym $mod+mod1+s exec  /sbin/poweroff
+#bindsym $mod+Shift+e exec i3-msg exit
+
+
+# Espacio entre la ventanas y el borde
+gaps outer -4
+
+# Espacio entre ventanas
+gaps inner 8
+
+
+# No separar del borde las ventanas si solo hay una visible
+smart_gaps on
+
+# No mostrar los bordes si solo hay una ventana en la pantalla
+smart_borders on
+
+# Mostrar la ventana de bluetooh de forma flotante
+for_window [class="Blueman-manager"] floating enable, resize set 500 400, move position left
+for_window [class="Galculator"] floating enable
+
+
+# Actualiza todos los bloques de i3blocks al presionar Mod+Shift+b
+bindsym $mod+Shift+b exec --no-startup-id pkill -RTMIN+1 i3blocks
+
+# 2. Bloqueo automático por inactividad (10 min)
+exec_always --no-startup-id xset s 600
+
+# 3. Vincular eventos del sistema (cerrar tapa/suspender) al bloqueador
+exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -t "Pantalla bloqueada\n $(date %H:%M)" --font "Sans" -n
